@@ -4,7 +4,7 @@ Homenagem de Dia do Professor (15 de outubro de 2026) para a Roberta Oliveira, p
 
 A página é uma lousa: o texto vai sendo escrito a giz, palavra por palavra, com o giz acompanhando a mão, e um apagador limpa o quadro entre uma "aula" e outra.
 
-**Ver online:** _adicione o link depois do deploy_
+**Ver online:** [homenagem-professora.vercel.app](https://homenagem-professora.vercel.app/)
 
 ## O que tem na lousa
 
