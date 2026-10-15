@@ -1,0 +1,628 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Para a professora Roberta</title>
+<meta name="description" content="Hoje a aula é sobre você.">
+<meta property="og:title" content="Para a professora Roberta">
+<meta property="og:description" content="Hoje a aula é sobre você.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#1d1915">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='4' fill='%23263a2f'/><path d='M16 25s-8-5-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 24 14c0 6-8 11-8 11z' fill='none' stroke='%23f3abbc' stroke-width='2.4' stroke-linejoin='round'/></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --parede: #1d1915;
+    --lousa: #263a2f;
+    --giz: #f1eee3;
+    --amarelo: #f3d47c;
+    --rosa: #f3abbc;
+    --azul: #abd5ea;
+    --texto: clamp(21px, min(3.7vw, 4.9vh), 44px);
+  }
+
+  /* Celular em pé: a lousa fica alta, então dá para escrever maior */
+  @media (max-width: 600px) and (orientation: portrait) {
+    :root { --texto: clamp(22px, 6.6vw, 30px); }
+  }
+
+  * { box-sizing: border-box; }
+
+  html, body { height: 100%; margin: 0; }
+
+  body {
+    min-height: 100svh;
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+    background: var(--parede);
+    color: var(--giz);
+    font-family: 'Caveat', 'Segoe Print', 'Comic Sans MS', cursive;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+  }
+
+  /* Moldura de madeira com a bandeja de giz embaixo */
+  .moldura {
+    position: relative;
+    width: min(1120px, 100vw - 16px);
+    height: min(760px, 100svh - 16px);
+    padding: clamp(8px, 1.4vw, 16px) clamp(8px, 1.4vw, 16px) clamp(24px, 3.2vw, 36px);
+    border-radius: 5px;
+    background:
+      repeating-linear-gradient(90deg, rgba(0,0,0,.08) 0 2px, transparent 2px 9px, rgba(255,255,255,.05) 9px 10px, transparent 10px 23px),
+      linear-gradient(180deg, #8b5e39, #6b4428);
+    box-shadow: 0 24px 60px rgba(0,0,0,.55), inset 0 0 0 1px rgba(0,0,0,.35), inset 0 2px 0 rgba(255,255,255,.12);
+  }
+
+  .lousa {
+    position: relative;
+    height: 100%;
+    overflow: hidden;
+    cursor: pointer;
+    border-radius: 2px;
+    background-color: var(--lousa);
+    background-image:
+      url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 .09 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>"),
+      radial-gradient(ellipse 60% 40% at 25% 30%, rgba(255,255,255,.05), transparent 70%),
+      radial-gradient(ellipse 50% 35% at 78% 72%, rgba(255,255,255,.04), transparent 70%);
+    box-shadow: inset 0 0 0 2px rgba(0,0,0,.35), inset 0 0 60px rgba(0,0,0,.5);
+  }
+
+  /* Cada "aula" ocupa a lousa inteira; a máscara de ruído dá a falha do giz */
+  .aula {
+    position: absolute;
+    inset: 0;
+    padding: clamp(18px, 3.4vw, 46px) clamp(18px, 4.4vw, 62px);
+    font-size: var(--texto);
+    line-height: 1.32;
+    text-shadow: 0 0 1px rgba(241,238,227,.6);
+    -webkit-mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='f'><feTurbulence type='fractalNoise' baseFrequency='.95' numOctaves='2' seed='4' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  -1.6 0 0 0 1.62'/></filter><rect width='100%25' height='100%25' filter='url(%23f)'/></svg>");
+    mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='f'><feTurbulence type='fractalNoise' baseFrequency='.95' numOctaves='2' seed='4' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  -1.6 0 0 0 1.62'/></filter><rect width='100%25' height='100%25' filter='url(%23f)'/></svg>");
+    -webkit-mask-size: 200px;
+    mask-size: 200px;
+  }
+
+  .aula[hidden] { display: none; }
+
+  /* O que sobra na lousa depois de apagar */
+  .fantasma {
+    opacity: .04;
+    filter: blur(1.6px);
+    pointer-events: none;
+  }
+
+  .palavra {
+    display: inline-block;
+    padding: .08em .16em;
+    margin: -.08em -.16em;
+    clip-path: inset(0 100% 0 0);
+  }
+
+  .risco {
+    display: block;
+    width: min(11em, 72%);
+    height: 3px;
+    margin: .05em 0 .75em;
+    border-radius: 2px;
+    background: currentColor;
+    opacity: .85;
+    clip-path: inset(0 100% 0 0);
+  }
+
+  .palavra.ok, .risco.ok { clip-path: none; }
+
+  .desenho { overflow: visible; }
+  .desenho path {
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 3;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-dasharray: 1 1;
+    stroke-dashoffset: 1;
+  }
+  .desenho.ok path { stroke-dashoffset: 0; }
+
+  .amarelo { color: var(--amarelo); }
+  .rosa { color: var(--rosa); }
+  .azul { color: var(--azul); }
+
+  p { margin: 0 0 .5em; max-width: 30em; }
+
+  .cabecalho {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 0 1em;
+    margin: 0;
+  }
+
+  .materia { font-size: 1.2em; font-weight: 600; }
+  .lateral { font-size: .9em; }
+  .pequeno { font-size: .82em; }
+
+  /* Abertura */
+  .abertura {
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+  }
+  .abertura .data { text-align: center; font-size: .95em; margin: 0; }
+  .abertura .centro { align-self: center; }
+  .nome {
+    margin: .1em 0 .15em;
+    font-size: 2.9em;
+    font-weight: 700;
+    line-height: .95;
+  }
+  .nome small { display: block; font-size: .42em; font-weight: 600; line-height: 1.4; }
+  .estrela {
+    display: inline-block;
+    width: .66em;
+    height: .66em;
+    margin-left: .22em;
+    vertical-align: .12em;
+    color: var(--amarelo);
+  }
+  .estrela path { stroke-width: 7; }
+  .coracao path { stroke-width: 5; }
+
+  /* Português */
+  .verbete { font-size: 1.7em; font-weight: 700; line-height: 1.1; margin-bottom: .1em; }
+
+  /* Final */
+  .deveres { list-style: none; margin: 0 0 .6em; padding: 0; }
+  .deveres li { margin-bottom: .25em; }
+  .feliz { font-size: 1.55em; font-weight: 700; line-height: 1.1; margin: .2em 0 0; }
+  .junto { white-space: nowrap; }
+  .coracao {
+    display: inline-block;
+    width: 1.3em;
+    height: 1.1em;
+    margin-left: .15em;
+    vertical-align: -.2em;
+    color: var(--rosa);
+  }
+  .assinatura { font-size: 1.2em; margin: .3em 0 0 1.5em; }
+
+  .rever {
+    position: absolute;
+    left: clamp(18px, 4.4vw, 62px);
+    bottom: clamp(14px, 2.6vw, 30px);
+    padding: 0;
+    border: 0;
+    background: none;
+    color: var(--azul);
+    font: inherit;
+    font-size: .8em;
+    cursor: pointer;
+  }
+  .rever .palavra {
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: .2em;
+  }
+
+  .dica {
+    position: absolute;
+    right: clamp(16px, 3vw, 40px);
+    bottom: clamp(12px, 2.2vw, 26px);
+    margin: 0;
+    font-size: calc(var(--texto) * .72);
+    color: var(--azul);
+    text-shadow: 0 0 1px rgba(171,213,234,.6);
+    opacity: 0;
+    transition: opacity .6s;
+    pointer-events: none;
+  }
+  .dica.visivel { opacity: .8; animation: respira 2.6s ease-in-out .6s infinite; }
+  @keyframes respira { 50% { opacity: .35; } }
+
+  /* Giz e apagador que se movem pela lousa */
+  .giz {
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 3;
+    width: clamp(34px, 4vw, 52px);
+    height: clamp(8px, .9vw, 11px);
+    margin-top: calc(clamp(8px, .9vw, 11px) / -2);
+    border-radius: 2px 3px 3px 2px;
+    background: linear-gradient(#fbfaf4, #d9d5c7);
+    box-shadow: 3px 4px 5px rgba(0,0,0,.35);
+    transform-origin: 0 50%;
+    opacity: 0;
+    transition: opacity .3s;
+    pointer-events: none;
+  }
+  .giz.ativo { opacity: 1; }
+
+  .apagador {
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 3;
+    width: clamp(74px, 9vw, 124px);
+    height: clamp(30px, 3.6vw, 46px);
+    border-radius: 4px;
+    background: linear-gradient(#a3733f, #7a502b);
+    box-shadow: 0 8px 14px rgba(0,0,0,.45);
+    opacity: 0;
+    pointer-events: none;
+  }
+  .apagador::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 34%;
+    border-radius: 0 0 4px 4px;
+    background: repeating-linear-gradient(90deg, rgba(0,0,0,.08) 0 1px, transparent 1px 4px), #cbc6bb;
+  }
+  .apagador.ativo { opacity: 1; }
+
+  /* Bandeja */
+  .bandeja {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: clamp(24px, 3.2vw, 36px);
+    display: flex;
+    align-items: flex-end;
+    gap: 14px;
+    padding: 0 7% clamp(5px, .8vw, 9px);
+    pointer-events: none;
+  }
+  .peca {
+    width: var(--w);
+    height: clamp(7px, .8vw, 10px);
+    border-radius: 2px;
+    background: var(--c);
+    box-shadow: 2px 2px 3px rgba(0,0,0,.35);
+  }
+  .repouso {
+    width: clamp(60px, 7vw, 96px);
+    height: clamp(12px, 1.4vw, 18px);
+    margin-left: auto;
+    border-radius: 3px;
+    background: linear-gradient(#a3733f, #7a502b);
+    box-shadow: 0 3px 5px rgba(0,0,0,.4);
+    transition: opacity .2s;
+  }
+  .repouso.fora { opacity: 0; }
+
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+</style>
+</head>
+<body>
+<main class="moldura">
+  <h1 class="sr-only">Homenagem de Dia do Professor para a professora Roberta Oliveira</h1>
+
+  <div class="lousa" id="lousa" aria-live="polite">
+    <div id="fantasmas" aria-hidden="true"></div>
+
+    <section class="aula abertura">
+      <p class="data">Quinta-feira, 15 de outubro de 2026</p>
+      <div class="centro">
+        <p class="pequeno">Hoje é Dia do Professor, e a aula é sobre ela:</p>
+        <h2 class="nome">
+          <small class="amarelo">professora</small>
+          Roberta Oliveira<svg class="desenho estrela" viewBox="0 0 100 100" aria-hidden="true"><path pathLength="1" d="M50 6 L61 38 L95 38 L68 59 L78 92 L50 72 L22 92 L32 59 L5 38 L39 38 Z"/></svg>
+        </h2>
+        <span class="risco"></span>
+      </div>
+      <span></span>
+    </section>
+
+    <section class="aula" hidden>
+      <header class="cabecalho"><span class="materia">Aula 1 · Português</span></header>
+      <span class="risco"></span>
+      <p class="verbete">pro·fes·so·ra</p>
+      <p class="azul pequeno">(substantivo feminino)</p>
+      <p>1. Pessoa que ensina a ler o mundo, uma aula de cada vez.</p>
+      <p>2. Pessoa que sabe o nome de cada aluno e o que cada um precisa.</p>
+      <p>Ver também: <span class="amarelo">Roberta.</span></p>
+    </section>
+
+    <section class="aula" hidden>
+      <header class="cabecalho"><span class="materia">Aula 2 · Matemática</span></header>
+      <span class="risco"></span>
+      <p class="azul">Problema:</p>
+      <p>30 alunos × 200 dias letivos = 6.000 “bom dia, professora!” por ano.</p>
+      <p>Quantos ela respondeu com um sorriso?</p>
+      <p>Resposta: <span class="amarelo">todos.</span></p>
+      <p class="pequeno rosa">(e ainda sobra um sorriso para mim quando ela chega em casa)</p>
+    </section>
+
+    <section class="aula" hidden>
+      <header class="cabecalho"><span class="materia">Aula 3 · Ciências</span></header>
+      <span class="risco"></span>
+      <p><span class="azul">Experimento:</span> observar a professora Roberta depois da aula.</p>
+      <p><span class="azul">Observação 1:</span> chega cansada, com a bolsa cheia de cadernos.</p>
+      <p><span class="azul">Observação 2:</span> mesmo assim, pergunta como foi o meu dia.</p>
+      <p><span class="azul">Conclusão:</span> <span class="amarelo">amor não se explica. Se observa.</span></p>
+    </section>
+
+    <section class="aula" hidden>
+      <header class="cabecalho"><span class="materia">Aula 4 · História</span></header>
+      <span class="risco"></span>
+      <p>Daqui a muitos anos, alguém vai dizer: “foi a professora Roberta que acreditou em mim”.</p>
+      <p>Ela está escrevendo um pedacinho da história de muita gente.</p>
+      <p class="amarelo">Inclusive a minha.</p>
+    </section>
+
+    <section class="aula" hidden>
+      <header class="cabecalho">
+        <span class="materia">Dever de casa</span>
+        <span class="lateral amarelo">para entregar hoje</span>
+      </header>
+      <span class="risco"></span>
+      <ul class="deveres">
+        <li>1. Descansar um pouquinho, sem culpa.</li>
+        <li>2. Lembrar que o que você faz muda vidas.</li>
+        <li>3. Saber que eu tenho muito orgulho de você.</li>
+      </ul>
+      <p class="feliz rosa">
+        Feliz Dia do Professor, meu
+        <span class="junto">amor.<svg class="desenho coracao" viewBox="0 0 120 100" aria-hidden="true"><path pathLength="1" d="M60 90 C 22 64, 6 46, 11 27 C 16 9, 45 5, 60 27 C 75 5, 104 9, 109 27 C 114 46, 98 64, 63 88 L 57 93"/></svg></span>
+      </p>
+      <p class="assinatura">— Victor</p>
+      <button class="rever" id="rever" type="button">rever a aula</button>
+    </section>
+
+    <div class="giz" id="giz" aria-hidden="true"></div>
+    <div class="apagador" id="apagador" aria-hidden="true"></div>
+    <p class="dica" id="dica" aria-hidden="true"></p>
+  </div>
+
+  <div class="bandeja" aria-hidden="true">
+    <span class="peca" style="--c:#f6f4ec; --w:clamp(26px, 3.4vw, 44px)"></span>
+    <span class="peca" style="--c:var(--amarelo); --w:clamp(18px, 2.2vw, 28px)"></span>
+    <span class="peca" style="--c:var(--rosa); --w:clamp(22px, 2.7vw, 34px)"></span>
+    <span class="repouso" id="repouso"></span>
+  </div>
+</main>
+
+<script>
+  const reduzido = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const temMouse = matchMedia('(hover: hover)').matches;
+
+  const lousa = document.getElementById('lousa');
+  const aulas = [...lousa.querySelectorAll('.aula')];
+  const giz = document.getElementById('giz');
+  const apagador = document.getElementById('apagador');
+  const repouso = document.getElementById('repouso');
+  const fantasmas = document.getElementById('fantasmas');
+  const dica = document.getElementById('dica');
+  const rever = document.getElementById('rever');
+
+  // Pausa medida pelo relógio das animações, que o navegador não atrasa como o setTimeout
+  const espera = (ms) => lousa.animate([], { duration: ms }).finished;
+  const ANGULO = 'rotate(32deg)';
+
+  let atual = 0;
+  let estado = 'parado'; // 'escrevendo' | 'apagando' | 'parado'
+  let pular = false;
+  let animacoes = [];
+
+  // Separa o texto em palavras para "escrever" uma de cada vez
+  function quebrarEmPalavras(raiz) {
+    const walker = document.createTreeWalker(raiz, NodeFilter.SHOW_TEXT);
+    const nos = [];
+    while (walker.nextNode()) nos.push(walker.currentNode);
+    for (const no of nos) {
+      if (!no.textContent.trim()) continue;
+      const frag = document.createDocumentFragment();
+      for (const parte of no.textContent.split(/(\s+)/)) {
+        if (!parte) continue;
+        if (/^\s+$/.test(parte)) { frag.append(' '); continue; }
+        const span = document.createElement('span');
+        span.className = 'palavra';
+        span.textContent = parte;
+        frag.append(span);
+      }
+      no.replaceWith(frag);
+    }
+  }
+
+  aulas.forEach(quebrarEmPalavras);
+
+  function moverGiz(x, y) {
+    giz.style.transform = `translate(${x}px, ${y}px) ${ANGULO}`;
+  }
+
+  // Escreve uma frase inteira: as palavras entram em sequência e o giz
+  // acompanha numa única animação, sem pausa entre uma palavra e outra
+  async function tracarFrase(itens) {
+    const L = lousa.getBoundingClientRect();
+    const curva = 'cubic-bezier(.3,.1,.6,1)';
+    const quadrosGiz = [];
+    const anims = [];
+    let t = 0;
+    let anterior = null;
+
+    for (const item of itens) {
+      const risco = item.classList.contains('risco');
+      const r = item.getBoundingClientRect();
+      const x0 = r.left - L.left;
+      const x1 = r.right - L.left;
+      const y = r.top - L.top + r.height * (risco ? .5 : .62);
+      const dur = risco ? 380 : Math.min(340, Math.max(80, item.textContent.length * 24));
+
+      if (anterior) t += 30 + Math.min(110, Math.hypot(x0 - anterior.x, y - anterior.y) * .12);
+      quadrosGiz.push({ t, transform: `translate(${x0}px, ${y}px) ${ANGULO}`, easing: curva });
+      quadrosGiz.push({ t: t + dur, transform: `translate(${x1}px, ${y}px) ${ANGULO}`, easing: 'ease-in-out' });
+      anims.push(item.animate(
+        [{ clipPath: 'inset(0 100% 0 0)' }, { clipPath: 'inset(0 0 0 0)' }],
+        { duration: dur, delay: t, easing: curva, fill: 'both' }
+      ));
+      t += dur;
+      anterior = { x: x1, y };
+    }
+
+    const g = giz.animate(
+      quadrosGiz.map((q) => ({ offset: q.t / t, transform: q.transform, easing: q.easing })),
+      { duration: t, fill: 'forwards' }
+    );
+    animacoes = [...anims, g];
+    await Promise.all(animacoes.map((a) => a.finished.catch(() => {})));
+    itens.forEach((i) => i.classList.add('ok'));
+    moverGiz(anterior.x, anterior.y);
+    animacoes.forEach((a) => a.cancel());
+  }
+
+  function agruparFrases(itens) {
+    const frases = [];
+    let blocoAnterior = null;
+    for (const item of itens) {
+      const bloco = item.closest('p, li, h2, header, button, .risco, .desenho');
+      if (bloco !== blocoAnterior || item.classList.contains('desenho')) frases.push([]);
+      frases[frases.length - 1].push(item);
+      blocoAnterior = bloco;
+    }
+    return frases;
+  }
+
+  // Desenhos (estrela, coração) com o giz seguindo o traço
+  function desenhar(svg) {
+    const path = svg.querySelector('path');
+    const total = path.getTotalLength();
+    const dur = svg.classList.contains('coracao') ? 1500 : 1100;
+    return new Promise((resolve) => {
+      const inicio = performance.now();
+      function quadro(agora) {
+        const p = pular ? 1 : Math.min(1, (agora - inicio) / dur);
+        path.style.strokeDashoffset = 1 - p;
+        const pt = path.getPointAtLength(total * p);
+        const m = path.getScreenCTM();
+        const L = lousa.getBoundingClientRect();
+        moverGiz(pt.x * m.a + pt.y * m.c + m.e - L.left, pt.x * m.b + pt.y * m.d + m.f - L.top);
+        if (p < 1) requestAnimationFrame(quadro);
+        else { path.style.strokeDashoffset = ''; resolve(); }
+      }
+      requestAnimationFrame(quadro);
+    });
+  }
+
+  async function escrever(aula) {
+    estado = 'escrevendo';
+    pular = false;
+    esconderDica();
+    const frases = agruparFrases([...aula.querySelectorAll('.palavra, .risco, .desenho')]);
+    if (!reduzido) giz.classList.add('ativo');
+
+    for (const [i, frase] of frases.entries()) {
+      if (i > 0 && !pular && !reduzido) await espera(180);
+      if (pular || reduzido) { frase.forEach((item) => item.classList.add('ok')); continue; }
+      if (frase[0].classList.contains('desenho')) await desenhar(frase[0]);
+      else await tracarFrase(frase);
+      frase.forEach((item) => item.classList.add('ok'));
+    }
+
+    giz.classList.remove('ativo');
+    estado = 'parado';
+    mostrarDica();
+  }
+
+  function guardarFantasma(aula) {
+    const f = aula.cloneNode(true);
+    f.classList.add('fantasma');
+    f.hidden = false;
+    f.inert = true;
+    f.querySelectorAll('[id]').forEach((n) => n.removeAttribute('id'));
+    f.style.transform = `translate(${(Math.random() * 14 - 7).toFixed(1)}px, ${(Math.random() * 8 - 4).toFixed(1)}px)`;
+    fantasmas.append(f);
+    while (fantasmas.children.length > 2) fantasmas.firstElementChild.remove();
+  }
+
+  async function apagar(aula) {
+    estado = 'apagando';
+    esconderDica();
+    guardarFantasma(aula);
+    if (reduzido) { aula.hidden = true; return; }
+
+    const L = lousa.getBoundingClientRect();
+    const ew = apagador.offsetWidth;
+    const passadas = 6;
+    const quadros = [];
+    for (let i = 0; i <= passadas; i++) {
+      const x = -ew + (L.width + ew) * (i / passadas);
+      const y = i % 2 ? L.height * .1 : L.height * .72;
+      quadros.push({ transform: `translate(${x}px, ${y}px) rotate(${i % 2 ? -5 : 5}deg)` });
+    }
+
+    apagador.classList.add('ativo');
+    repouso.classList.add('fora');
+    const dur = 1300;
+    apagador.animate(quadros, { duration: dur, easing: 'ease-in-out' });
+    const c = aula.animate(
+      [{ clipPath: 'inset(0 0 0 0)' }, { clipPath: 'inset(0 0 0 100%)' }],
+      { duration: dur, easing: 'ease-in-out' }
+    );
+    await c.finished;
+    aula.hidden = true;
+    apagador.classList.remove('ativo');
+    repouso.classList.remove('fora');
+  }
+
+  function mostrarDica() {
+    if (atual === aulas.length - 1) return;
+    const verbo = temMouse ? 'clique' : 'toque';
+    dica.textContent = atual === 0 ? `${verbo} na lousa para começar a aula` : `${verbo} para a próxima aula →`;
+    dica.classList.add('visivel');
+  }
+
+  function esconderDica() {
+    dica.classList.remove('visivel');
+  }
+
+  async function avancar() {
+    if (estado === 'escrevendo') {
+      pular = true;
+      animacoes.forEach((a) => a.finish());
+      return;
+    }
+    if (estado !== 'parado' || atual >= aulas.length - 1) return;
+    await apagar(aulas[atual]);
+    atual++;
+    aulas[atual].hidden = false;
+    await escrever(aulas[atual]);
+  }
+
+  async function recomecar() {
+    if (estado !== 'parado') return;
+    await apagar(aulas[atual]);
+    aulas.forEach((a) => a.querySelectorAll('.ok').forEach((n) => n.classList.remove('ok')));
+    atual = 0;
+    aulas[0].hidden = false;
+    await escrever(aulas[0]);
+  }
+
+  lousa.addEventListener('click', avancar);
+  rever.addEventListener('click', (e) => { e.stopPropagation(); recomecar(); });
+  document.addEventListener('keydown', (e) => {
+    if (e.target === rever) return;
+    if ([' ', 'Enter', 'ArrowRight', 'PageDown'].includes(e.key)) {
+      e.preventDefault();
+      avancar();
+    }
+  });
+
+  document.fonts.ready.then(() => espera(500)).then(() => escrever(aulas[0]));
+</script>
+</body>
+</html>
