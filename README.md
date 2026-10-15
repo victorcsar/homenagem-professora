@@ -61,4 +61,4 @@ Como é um site estático, não precisa de configuração.
 
 ---
 
-Feito pelo Victor, com muito carinho, para a Roberta.
+Feito pelo Víctor César, com muito carinho, para a Roberta.
